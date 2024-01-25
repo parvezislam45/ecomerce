@@ -42,15 +42,32 @@ const Nav = () => {
                 <a href="/">Home</a>
               </li>
             </Link>
-            <li>
-              <a>Course</a>
-            </li>
-            <li>
-              <a>Teacher</a>
-            </li>
+            <Link to="/">
+              <li className="font-bold">
+                <a href="/">Home</a>
+              </li>
+            </Link>
+            {user && (
+  <li>
+    <Link to="/profile">Profile</Link>
+  </li>
+)}
+            {admin && (
+        <>
+      <li>
+        <Link to="/dashboard">Dashboard</Link> 
+      </li>
+      <li>
+        <Link to="/all">All</Link> 
+      </li>
+      </>
+      
+    )}
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-xl text-white">ABC E Comerce</a>
+        <img className='w-10 h-10' src="https://i.postimg.cc/90cqnM1G/420049771-392741139814091-4903558908153046505-n.jpg" alt="" />
+        <a href='/' className="btn btn-ghost normal-case text-sm text-white">ABC E Comerce</a>
+        
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">

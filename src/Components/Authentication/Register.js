@@ -1,6 +1,6 @@
 import React from 'react';
 import Loading from '../Loading/Loading';
-import axios from 'axios';
+
 import {
     useCreateUserWithEmailAndPassword,
     useSignInWithGoogle,

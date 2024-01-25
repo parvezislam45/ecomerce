@@ -1,8 +1,11 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import {useNavigate } from "react-router-dom";
 
 const Add = () => {
     const { register, handleSubmit } = useForm();
+    const navigate = useNavigate();
     const onSubmit = (data,event) => {
         const url = `https://abccomerce.onrender.com/product/`;
         console.log(url)
@@ -16,7 +19,11 @@ const Add = () => {
         .then(res => res.json())
         .then (result =>{
             console.log(result)
+            navigate('/all')
             event.target.reset()
+            toast('product added Successfully',result);
+            
+
         })
     }
     return (

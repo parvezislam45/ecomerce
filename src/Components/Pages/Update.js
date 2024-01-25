@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useParams,useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 const Update = () => {
     const {id} = useParams();
     const [users,setUsers]=useState({});
@@ -32,8 +33,8 @@ const Update = () => {
       .then((res) => res.json())
       .then((result) => {
         console.log(result,'success');
-        navigate('/dashboard')
-        alert("Student Updated successfully", result);
+        navigate('/all')
+        toast("Product Updated successfully", result);
         event.target.reset();
       });
     }

@@ -9,12 +9,12 @@ const ProductCard = ({ product, handleDelate }) => {
       <div className="group border-gray-100/30 flex w-full max-w-xs flex-col self-center overflow-hidden rounded-lg border bg-gray-700 shadow-md">
         <a
           className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl"
-          href="#"
+          href="/"
         >
           <img
             className="peer absolute top-0 right-0 h-full w-full object-cover"
             src={image}
-            alt="product image"
+            alt="product"
           />
 
           <svg
@@ -34,7 +34,7 @@ const ProductCard = ({ product, handleDelate }) => {
           </svg>
         </a>
         <div className="mt-4 px-5 pb-5">
-          <a href="#">
+          <a href="/">
             <h5 className="text-xl tracking-tight text-white">{name}</h5>
           </a>
           <div className="mt-2 mb-5 flex items-center justify-between">
@@ -43,11 +43,7 @@ const ProductCard = ({ product, handleDelate }) => {
               <span className="text-sm text-white line-through">$699</span>
             </p>
           </div>
-          <a
-            href="#"
-            className="hover:border-white/40 flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
-          >
-            <svg
+          <Link to={`/details/${_id}`}><button className="hover:border-white/40 flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300"><svg
               xmlns="http://www.w3.org/2000/svg"
               className="mr-2 h-6 w-6"
               fill="none"
@@ -56,18 +52,22 @@ const ProductCard = ({ product, handleDelate }) => {
             >
               <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
             </svg>
-            Add to cart
-          </a>
+            See Details</button></Link>
+          <div className='flex justify-between items-center gap-10 mt-10'>
+          <Link to={`update/${_id}`}>
+          <button type="button" class="text-white hover:text-white border border-yellow-400 hover:bg-yellow-600 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-yellow-600 dark:text-white dark:hover:text-white dark:hover:bg-yellow-600 dark:focus:ring-yellow-900">Edit</button>
+        </Link>
           <button
             onClick={() => handleDelate(_id)}
-            className="btn btn-ghost btn-xs"
+            class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
           >
             Delate
           </button>
+          
+          </div>
+         
         </div>
-        <Link to={`update/${_id}`}>
-          <button>Edit</button>
-        </Link>
+        
       </div> 
         </div>
     );
