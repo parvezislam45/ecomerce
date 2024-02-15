@@ -1,15 +1,22 @@
-import React, { useEffect, useState } from 'react';
-
+import { useEffect, useState } from 'react';
+import axios from "axios";
 const useProduct = () => {
-    const [menu, setMenu] = useState([]);
-    useEffect(() => {
-      fetch("https://abccomerce.onrender.com/product/")
-        .then((res) => res.json())
-        .then((data) => {
-          setMenu(data);
-        });
-    }, []);
-    return [menu,setMenu];
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await axios.get("http://localhost:9000/products");
+      
+        setProducts(res.data);
+        console.log(res.data)
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+  return [products, setProducts];
 };
 
 export default useProduct;

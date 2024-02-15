@@ -69,10 +69,6 @@ const Products = () => {
       </div>
     ))}
   </Slider>
-        <div className="text-center mt-10">
-          <Link to='all'><button className="btn btn-outline btn-secondary">All Product</button></Link>
-        
-        </div>
       </section>
     </div>
     );

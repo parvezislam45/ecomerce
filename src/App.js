@@ -7,7 +7,7 @@ import AllProduct from "./Components/Pages/AllProduct";
 import Login from "./Components/Authentication/Login";
 import Register from "./Components/Authentication/Register";
 import Dashboard from "./Components/Dashboard/Dashboard";
-import Add from "./Components/Dashboard/Add";
+import Add from "./Components/Pages/Add";
 import Details from "./Components/Pages/Details";
 import Update from "./Components/Pages/Update";
 import RequireAdmin from "./Components/Require/RequireAdmin";
@@ -24,9 +24,9 @@ function App() {
         <Route path="/details/:id" element={<Details/>}></Route>
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/register" element={<Register/>}></Route>
-        <Route path="/dashboard" element={<RequireAdmin><Dashboard/></RequireAdmin>}></Route>
-        <Route path="/dashboard/add" element={<Add/>}></Route>
-        <Route path="all/update/:id" element={<Update/>}></Route>
+        <Route path="/dashboard" element={<Dashboard/>}></Route>
+        <Route path="/add" element={<Add/>}></Route>
+        <Route path="/update/:id" element={<Update/>}></Route>
       </Routes>
       <ToastContainer/>
       <Footer/>

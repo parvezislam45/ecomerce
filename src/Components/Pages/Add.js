@@ -1,31 +1,40 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useState } from 'react';
+import axios from "axios";
 import { toast } from 'react-toastify';
 import {useNavigate } from "react-router-dom";
 
 const Add = () => {
-    const { register, handleSubmit } = useForm();
-    const navigate = useNavigate();
-    const onSubmit = (data,event) => {
-        const url = `https://abccomerce.onrender.com/product/`;
-        console.log(url)
-        fetch(url,{
-            method : 'POST',
-            headers : {
-                'content-type' : 'application/json'
-            },
-            body : JSON.stringify(data)
-        })
-        .then(res => res.json())
-        .then (result =>{
-            console.log(result)
-            navigate('/all')
-            event.target.reset()
-            toast('product added Successfully',result);
-            
+  const navigate = useNavigate();
+  const [id, setId] = useState('');
+  const [name, setName] = useState('');
+  const [desc, setDesc] = useState('');
+  const [category, setCategory] = useState('');
+  const [price, setPrice] = useState('');
+  const [image, setImage] = useState(null)
 
-        })
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('id', id);
+    formData.append('name', name);
+    formData.append('desc', desc);
+    formData.append('category', category); 
+    formData.append('price', price);       
+    formData.append('image', image);
+
+    try {
+      await axios.post('http://localhost:9000/products', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      toast("Product Added SuccessFully")
+      navigate("/all")
+      console.log('Product added successfully');
+    } catch (error) {
+      console.error('Error adding product:', error);
     }
+  };
     return (
         <div className="grid min-h-screen place-items-center">
         <div className="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
@@ -35,16 +44,26 @@ const Add = () => {
               please fill in your information to continue
             </span>
           </h1>
-          <form className="mt-6"onSubmit={handleSubmit( onSubmit)}>
+          <form className="mt-6"onSubmit={handleSubmit}>
+          <label className="block mt-2 text-xs font-semibold text-gray-600 uppercase">
+              ID : 
+            </label>
+            <input
+              type="number"
+              value={id} onChange={(e) => setId(e.target.value)}
+              placeholder="Input Id"
+              className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
+             
+            />
             <label className="block mt-2 text-xs font-semibold text-gray-600 uppercase">
               Name
             </label>
             <input
               type="text"
-              name="name"
+              value={name} onChange={(e) => setName(e.target.value)}
               placeholder="Input Product Name"
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
-              {...register("name", {})}
+              
             />
             <label className="block mt-2 text-xs font-semibold text-gray-600 uppercase">
               Description
@@ -52,37 +71,37 @@ const Add = () => {
             <textarea
               className="textarea textarea-bordered block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
               placeholder="Type Description"
-              {...register("description", {})}
+              value={desc} onChange={(e) => setDesc(e.target.value)}
             ></textarea>
             <label className="block mt-2 text-xs font-semibold text-gray-600 uppercase">
               Price
             </label>
             <input
               type="text"
-              name="price"
+              value={price} onChange={(e) => setPrice(e.target.value)}
               placeholder="Input Price"
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
-              {...register("price", {})}
+             
             />
             <label className="block mt-2 text-xs font-semibold text-gray-600 uppercase">
               Category
             </label>
             <input
               type="text"
-              name="category"
+              value={category} onChange={(e) => setCategory(e.target.value)}
               placeholder="Input Category"
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
-              {...register("category", {})}
+             
             />
             <label className="block mt-2 text-xs font-semibold text-gray-600 uppercase">
               Image
             </label>
             <input
-              type="text"
-              name="image"
+              type="file" 
+              onChange={(e) => setImage(e.target.files[0])}
               placeholder="Input Image Url"
               className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
-              {...register("image", {})}
+             
             />
             <button
               type="submit"
